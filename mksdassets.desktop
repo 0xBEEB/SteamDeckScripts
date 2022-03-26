@@ -1,0 +1,21 @@
+[Desktop Entry]
+Categories=Utility
+Comment[en_US]=Fetches Discover app images for Steam Library
+Comment=Fetches Discover app images for Steam Library
+Exec=bash /home/deck/.local/bin/mksdassets.sh
+GenericName[en_US]=
+GenericName=
+Icon=insert-image
+Keywords=graphic;utility
+MimeType=
+Name[en_US]=Make Steam Deck Assets
+Name=Make Steam Deck Assets
+Path=
+StartupNotify=true
+Terminal=true
+TerminalOptions=
+Type=Application
+X-DBUS-ServiceName=
+X-DBUS-StartupType=
+X-KDE-SubstituteUID=false
+X-KDE-Username=
