@@ -30,12 +30,13 @@ COLOR="black"
 # $2 = Height of rectangle
 # $3 = App name
 mkasset() {
-    w=$1
-    h=$2
-    name=$3
-    location="$ASSET_DIR/$name"
-    ow=($w/2)-128
-    oh=($h/2)-128
+    local w=$1
+    local h=$2
+    local name=$3
+    local location="$ASSET_DIR/$name"
+    local ow=($w/2)-128
+    local oh=($h/2)-128
+    
     ffmpeg -i "$location/$name.jpg" -qscale:v 0 -vf "scale=256:256,pad=$w:$h:$ow:$oh:color=$COLOR" "$location/${w}x${h}-$name.jpg" 
 }
 
@@ -43,9 +44,10 @@ mkasset() {
 # Icons are converted to jpg to remove transparency.
 # $1 = App name
 fetch_asset() {
-    name=$1
-    location="$ASSET_DIR/$name"
-    mkdir -p location
+    local name=$1
+    local location="$ASSET_DIR/$name"
+    
+    mkdir -p $location
     curl "https://dl.flathub.org/repo/appstream/x86_64/icons/128x128/$name.png" > "$location/$name.png"
     ffmpeg -i "$location/$name.png" -qscale:v 2 "$location/$name.jpg"
     mkasset 600 900 $name
@@ -62,14 +64,15 @@ if [ $# -eq 0 ]
 then
     mkdir -p "$ASSET_DIR"
 
-    for app in "${APP_DIR}/*"
+    for app in $APP_DIR/*
     do
-        fetch_asset $app
+        app_name=`basename "$app"`
+        fetch_asset $app_name
     done
 else
-    for app in "$@"
+    for app_name in "$@"
     do
-        fetch_asset $app
+        fetch_asset $app_name
     done
 fi
 
