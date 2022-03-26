@@ -36,5 +36,4 @@ mkasset 600 900
 mkasset 3840 1240
 mkasset 1280 720
 mkasset 2108 460
-rm "$NAME.jpg"
 rm "$NAME.png"
